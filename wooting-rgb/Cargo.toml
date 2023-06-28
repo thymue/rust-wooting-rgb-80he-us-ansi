@@ -1,0 +1,16 @@
+[package]
+name = "wooting-rgb"
+description = "Wooting RGB SDK Rust Library"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+readme.workspace = true
+repository.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories = ["api-bindings", "games"]
+
+[dependencies]
+lazy_static = "1.4"
+thiserror = "1.0"
+wooting-rgb-sys = { version = "0.2.0", path = "../wooting-rgb-sys" }

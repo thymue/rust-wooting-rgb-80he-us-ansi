@@ -5,13 +5,11 @@ use std::process::Command;
 use pkg_config::find_library;
 
 fn main() {
-    // If enabled, attempt to find `wooting-analog-sdk` via pkg-config. Otherwise, we'll
+    // If enabled, attempt to find `wooting-rgb-sdk` via pkg-config. Otherwise, we'll
     // need to build the SDK.
-    let use_pkg_config = env::var("WOOTING_ANALOG_SDK_SHARED").is_ok();
-    if use_pkg_config {
-        if find_library("wooting-analog-sdk").is_ok() {
-            return;
-        }
+    let use_pkg_config = env::var("WOOTING_RGB_SDK_SHARED").is_ok();
+    if use_pkg_config && find_library("wooting-rgb-sdk").is_ok() {
+        return;
     }
 
     // Clone submodules if that hasn't already happened.
@@ -26,12 +24,13 @@ fn main() {
 
     // Generate bindings.
     let bindings = bindgen::Builder::default()
-        .header("vendor/src/wooting-analog-sdk.h")
+        .header("vendor/src/wooting-rgb-sdk.h")
+        // .header("vendor/src/wooting-usb.h")
         .generate()
-        .expect("Unable to generate bindings for the Wooting Analog SDK");
+        .expect("Unable to generate bindings for the Wooting RGB SDK");
     bindings
         .write_to_file(out_dir.join("bindings.rs"))
-        .expect("Unable to write Wooting Analog SDK bindings");
+        .expect("Unable to write Wooting RGB SDK bindings");
 
     // Build hidapi to link against.
     let mut cfg = cc::Build::new();
@@ -40,8 +39,8 @@ fn main() {
         .include("vendor/hidapi/hidapi");
 
     if target.contains("linux") {
-        let use_pkg_config_for_hidapi = env::var("WOOTING_ANALOG_SDK_HIDAPI_SHARED").is_ok();
-        let use_hidraw_for_hidapi = env::var("WOOTING_ANALOG_SDK_HIDAPI_HIDRAW").is_ok();
+        let use_pkg_config_for_hidapi = env::var("WOOTING_RGB_SDK_HIDAPI_SHARED").is_ok();
+        let use_hidraw_for_hidapi = env::var("WOOTING_RGB_SDK_HIDAPI_HIDRAW").is_ok();
         match (use_pkg_config_for_hidapi, use_hidraw_for_hidapi) {
             (true, false) => {
                 let lib = find_library("hidapi-libusb").expect("Unable to find hidapi-libusb");
@@ -64,7 +63,7 @@ fn main() {
                 cfg.file("vendor/hidapi/libusb/hid.c");
             }
             (false, true) => {
-                let libudev = find_library("libudev").expect("Unable to find libusb-1.0");
+                let libudev = find_library("libudev").expect("Unable to find libudev");
                 for path in libudev.include_paths {
                     cfg.include(path.to_str().unwrap());
                 }
@@ -77,13 +76,14 @@ fn main() {
         println!("cargo:rustc-link-lib=setupapi");
     } else if target.contains("apple") {
         cfg.file("vendor/hidapi/mac/hid.c");
+        println!("cargo:rustc-link-lib=framework=IOKit");
+        println!("cargo:rustc-link-lib=framework=CoreFoundation");
     } else {
-        panic!("Unsupported target for wooting-analog-sdk-sys");
+        panic!("Unsupported target for wooting-rgb-sys");
     };
 
     // Build SDK to link against.
-    cfg.warnings(false)
-        .extra_warnings(false)
-        .file("vendor/src/wooting-analog-sdk.c")
-        .compile("wooting-analog-sdk");
+    cfg.file("vendor/src/wooting-rgb-sdk.c")
+        .file("vendor/src/wooting-usb.c")
+        .compile("wooting-rgb-sdk");
 }

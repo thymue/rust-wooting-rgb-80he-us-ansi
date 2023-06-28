@@ -1,16 +1,13 @@
-use std::thread::sleep;
-use std::time::Duration;
+use std::{thread::sleep, time::Duration};
 
-use wooting_sdk::{
-    rgb::{self, RgbKeyboard},
-    Key,
-};
+use wooting_rgb::{Key, RgbKeyboard};
 
 fn main() {
     println!(
         "Keyboard connected? {}",
-        rgb::is_wooting_keyboard_connected()
+        wooting_rgb::is_wooting_keyboard_connected()
     );
+
     println!("Resetting keyboard colors...");
     let mut keyboard = RgbKeyboard::default();
 
@@ -34,5 +31,6 @@ fn main() {
     keyboard.array_set_single(Key::Y, 255, 255, 255);
     println!("Updating... {}", keyboard.array_update());
     sleep(Duration::from_millis(1000));
+
     println!("Finished!");
 }

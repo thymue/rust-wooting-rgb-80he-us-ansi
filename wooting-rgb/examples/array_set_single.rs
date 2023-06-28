@@ -1,8 +1,6 @@
-use std::thread::sleep;
-use std::time::Duration;
+use std::{thread::sleep, time::Duration};
 
-use wooting_sdk::rgb::{self, RgbKeyboard};
-use wooting_sdk::Key;
+use wooting_rgb::{Key, RgbKeyboard};
 
 pub const ALL_KEYS: &'static [Key] = &[
     Key::Escape,
@@ -120,13 +118,18 @@ pub const ALL_KEYS: &'static [Key] = &[
 fn main() {
     println!(
         "Keyboard connected? {}",
-        rgb::is_wooting_keyboard_connected()
+        wooting_rgb::is_wooting_keyboard_connected()
     );
+
     let mut keyboard = RgbKeyboard::default();
+
     for key in ALL_KEYS {
-        println!("Setting {} to white!", key);
-        let _ = keyboard.direct_set_key(*key, 255, 255, 255);
-        sleep(Duration::from_millis(500));
+        keyboard.array_set_single(*key, 255, 255, 255);
     }
+    sleep(Duration::from_millis(1000));
+
+    println!("Updating... {}", keyboard.array_update());
+    sleep(Duration::from_millis(1000));
+
     println!("Finished!");
 }

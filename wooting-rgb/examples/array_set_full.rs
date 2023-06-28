@@ -1,14 +1,15 @@
-use std::thread::sleep;
-use std::time::Duration;
+use std::{thread::sleep, time::Duration};
 
-use wooting_sdk::{rgb, Key};
+use wooting_rgb::{Key, RgbKeyboard};
 
 fn main() {
     println!(
         "Keyboard connected? {}",
-        rgb::is_wooting_keyboard_connected()
+        wooting_rgb::is_wooting_keyboard_connected()
     );
-    let mut keyboard = rgb::RgbKeyboard::default();
+
+    let mut keyboard = RgbKeyboard::default();
+
     let array = vec![
         (Key::Escape, (255, 255, 255)),
         (Key::F1, (255, 255, 255)),
@@ -121,9 +122,12 @@ fn main() {
         (Key::NumZero, (255, 255, 255)),
         (Key::NumDelete, (255, 255, 255)),
     ];
+
     keyboard.array_set_full(&array);
     sleep(Duration::from_millis(5000));
+
     println!("Updating... {}", keyboard.array_update());
     sleep(Duration::from_millis(5000));
+
     println!("Finished!");
 }
