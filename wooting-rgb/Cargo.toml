@@ -11,6 +11,6 @@ keywords.workspace = true
 categories = ["api-bindings", "games"]
 
 [dependencies]
-lazy_static = "1.4"
-thiserror = "1.0"
-wooting-rgb-sys = { version = "0.2.0", path = "../wooting-rgb-sys" }
+lazy_static = "1"
+thiserror = "1"
+wooting-rgb-sys = { version = "0.3", path = "../wooting-rgb-sys" }

@@ -8,7 +8,7 @@ fn main() {
         wooting_rgb::is_wooting_keyboard_connected()
     );
 
-    let mut keyboard = RgbKeyboard::default();
+    let mut keyboard = RgbKeyboard;
 
     keyboard.array_auto_update(true);
     keyboard.array_set_single(Key::Q, 255, 255, 255);

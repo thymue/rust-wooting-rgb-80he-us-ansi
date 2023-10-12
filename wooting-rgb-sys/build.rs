@@ -1,6 +1,8 @@
-use std::env;
-use std::path::{Path, PathBuf};
-use std::process::Command;
+use std::{
+    env,
+    path::{Path, PathBuf},
+    process::Command,
+};
 
 use pkg_config::find_library;
 
@@ -15,7 +17,7 @@ fn main() {
     // Clone submodules if that hasn't already happened.
     if !Path::new("vendor/.git").exists() || !Path::new("vendor/hidapi/.git").exists() {
         let _ = Command::new("git")
-            .args(&["submodule", "update", "--init", "--recursive"])
+            .args(["submodule", "update", "--init", "--recursive"])
             .status();
     }
 

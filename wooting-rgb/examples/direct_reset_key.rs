@@ -7,7 +7,7 @@ fn main() {
         "Keyboard connected? {}",
         wooting_rgb::is_wooting_keyboard_connected()
     );
-    let mut keyboard = RgbKeyboard::default();
+    let mut keyboard = RgbKeyboard;
 
     keyboard.direct_set_key(Key::Q, 255, 255, 255);
     sleep(Duration::from_millis(1000));

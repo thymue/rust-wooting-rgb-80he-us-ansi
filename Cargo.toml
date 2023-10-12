@@ -1,8 +1,9 @@
 [workspace]
 members = ["wooting-rgb", "wooting-rgb-sys"]
+resolver = "2"
 
 [workspace.package]
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Shayne Hartford <shaybox@shaybox.com>"]
 edition = "2021"
 readme = "README.md"

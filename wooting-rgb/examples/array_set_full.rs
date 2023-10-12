@@ -8,7 +8,7 @@ fn main() {
         wooting_rgb::is_wooting_keyboard_connected()
     );
 
-    let mut keyboard = RgbKeyboard::default();
+    let mut keyboard = RgbKeyboard;
 
     let array = vec![
         (Key::Escape, (255, 255, 255)),

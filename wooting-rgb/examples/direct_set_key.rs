@@ -2,7 +2,7 @@ use std::{thread::sleep, time::Duration};
 
 use wooting_rgb::{Key, RgbKeyboard};
 
-pub const ALL_KEYS: &'static [Key] = &[
+pub const ALL_KEYS: &[Key] = &[
     Key::Escape,
     Key::F1,
     Key::F2,
@@ -121,7 +121,7 @@ fn main() {
         wooting_rgb::is_wooting_keyboard_connected()
     );
 
-    let mut keyboard = RgbKeyboard::default();
+    let mut keyboard = RgbKeyboard;
 
     for key in ALL_KEYS {
         println!("Setting {} to white!", key);

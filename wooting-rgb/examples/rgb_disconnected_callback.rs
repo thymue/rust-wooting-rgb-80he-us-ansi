@@ -20,7 +20,7 @@ fn main() {
     });
 
     println!("Waiting until disconnect...");
-    let mut keyboard = RgbKeyboard::default();
+    let mut keyboard = RgbKeyboard;
     let mut set = true;
     loop {
         // Trigger a read so that a disconnect will be noticed. This is a limitation of that API.
