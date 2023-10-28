@@ -19,3 +19,7 @@
 # Wooting-RGB
 
 Wooting RGB SDK Rust Bindings and Library
+
+## Linux
+
+Linux requires udev rules, if you're on Archlinux you can install the `wootility-lekker-appimage` package, or follow [this guide](https://help.wooting.io/en/article/wootility-configuring-device-access-for-wootility-under-linux-udev-rules-r6lb2o/)
