@@ -82,23 +82,13 @@ pub enum Key {
     /// Function key (`F12`). Normally programmed to cause an operating system or application to
     /// perform certain actions.
     F12,
+    /// Mode key. Toggles between digital and analog modes.
+    Mode,
     /// Print screen key (`Prt Sc`). May share the same key as system request. Normally takes a
     /// screenshot.
     PrintScreen,
     /// Pause (or break) key. Has no well defined purpose.
     Pause,
-    /// Scroll lock key (`Scr Lk`). Has different functions or purposes depending on the
-    /// application or operating system. Originally intended to make arrow keys scroll the current
-    /// window contents instead of moving the cursor.
-    ScrollLock,
-    /// Analog profile key (`A1`). Switches to analog profile one.
-    A1,
-    /// Analog profile key (`A2`). Switches to analog profile two.
-    A2,
-    /// Analog profile key (`A3`). Switches to analog profile three.
-    A3,
-    /// Mode key. Toggles between digital and analog modes.
-    Mode,
     /// Tilde key (`~`).
     Tilde,
     /// Number one key (`1`).
@@ -132,22 +122,8 @@ pub enum Key {
     /// mode replaces the character present in the current location. Insert mode inserts a
     /// character at the current position, forcing all characters past it one position further.
     Insert,
-    /// Home key. Has the opposite effect of the end key.
-    Home,
     /// Page up key (`Pg Up`). Scrolls up in documents.
     PageUp,
-    /// Number lock key (`Num`). Affects the function of the numeric keypad located to the right
-    /// of the main keyboard.
-    NumLock,
-    /// Divide key on the numpad (`/`). Types a forward slash or acts as a division key in
-    /// calculator applications.
-    NumDivide,
-    /// Multiply key on the numpad (`*`). Types a star or acts as a multiplication key in
-    /// calculator applications.
-    NumMultiply,
-    /// Subtract key on the numpad (`-`). Types a dash or acts as a subtraction key in
-    /// calculator applications.
-    NumSubtract,
     /// Tab key. Advances cursor to next tab stop.
     Tab,
     /// Letter `q` key.
@@ -178,19 +154,8 @@ pub enum Key {
     Backslash,
     /// Delete key (`Del`). Deletes the character in the position after the cursor.
     Delete,
-    /// End key. Has the opposite effect of the home key.
-    End,
     /// Page down key (`Pg Dn`). Scrolls down in documents.
     PageDown,
-    /// Number seven key (`7`) on the numpad.
-    NumSeven,
-    /// Number eight key (`8`) on the numpad.
-    NumEight,
-    /// Number nine key (`9`) on the numpad.
-    NumNine,
-    /// Addition key on the numpad (`+`). Types a plus or acts as a addition key in calculator
-    /// applications.
-    NumAddition,
     /// Capitalization lock key. Causes all letters in latin-based scripts to be generated in
     /// capitals.
     CapsLock,
@@ -216,26 +181,11 @@ pub enum Key {
     SemiColon,
     /// Apostrophe key (`'`).
     Apostrophe,
-    /// Represents a key that is specific to the keyboard layout. This key is positioned above
-    /// the return key or to the left of the return key. On UK layouts, this is a pound (`#`) key.
-    /// On US layouts, this is a backslash key. This key has the same scan index as the backslash
-    /// key.
-    ISO1,
     /// Return (or enter) key.
     Return,
-    /// Number four key (`4`) on the numpad.
-    NumFour,
-    /// Number five key (`5`) on the numpad.
-    NumFive,
-    /// Number six key (`6`) on the numpad.
-    NumSix,
     /// Left shift modifier key. Used to type capital letters and other alternate "upper"
     /// characters.
     LeftShift,
-    /// Represents a key that is specific to the keyboard layout. This key is positioned to the
-    /// right of the left shift key. On UK layouts, this is a backslash key. On US layouts, this
-    /// key does not exist.
-    ISO2,
     /// Letter `z` key.
     Z,
     /// Letter `x` key.
@@ -260,14 +210,6 @@ pub enum Key {
     RightShift,
     /// Up arrow key. Moves the cursor in the upwards direction.
     UpArrow,
-    /// Number one key (`1`) on the numpad.
-    NumOne,
-    /// Number two key (`2`) on the numpad.
-    NumTwo,
-    /// Number three key (`3`) on the numpad.
-    NumThree,
-    /// Return (or enter) key on the numpad. Performs the same function as the normal return key.
-    NumReturn,
     /// Left control modifier key. Performs a special operation when pressed in conjunction with
     /// another key.
     LeftControl,
@@ -275,12 +217,18 @@ pub enum Key {
     LeftMod,
     /// Left alt modifier key. Used to change (alternate) the function of other pressed keys.
     LeftAlt,
-    /// Space key (` `).
+    /// Space key LED 1 (starts from the left)
+    SpaceLed1,
+    /// Space key LED 2
+    SpaceLed2,
+    /// Space key LED 3 (actual space key) (` `).
     Space,
+    /// Space key LED 4.
+    SpaceLed4,
+    /// Space key LED 5.
+    SpaceLed5,
     /// Right alt modifier key. Performs the same function as left alt.
     RightAlt,
-    /// Right mod modifier key. Performs the same function as left mod.
-    RightMod,
     /// Function key (`Fn`). Performs an alternative operation for some keys, normally defined
     /// by the keyboard and indicated by symbols on the key.
     Fn,
@@ -292,10 +240,6 @@ pub enum Key {
     DownArrow,
     /// Right arrow key. Moves the cursor in the right direction.
     RightArrow,
-    /// Number zero key (`0`) on the numpad.
-    NumZero,
-    /// Delete key (`Del`) on the numpad. Performs the same function as the normal delete key.
-    NumDelete,
 }
 
 impl Display for Key {
@@ -320,10 +264,6 @@ impl Display for Key {
                 F12 => "F12",
                 PrintScreen => "Print Screen",
                 Pause => "Pause",
-                ScrollLock => "Scroll Lock",
-                A1 => "A1",
-                A2 => "A2",
-                A3 => "A3",
                 Mode => "Mode",
                 Tilde => "~",
                 One => "1",
@@ -340,12 +280,7 @@ impl Display for Key {
                 Equals => "=",
                 Backspace => "Backspace",
                 Insert => "Insert",
-                Home => "Home",
                 PageUp => "Page Up",
-                NumLock => "Num Lock",
-                NumDivide => "\\",
-                NumMultiply => "*",
-                NumSubtract => "-",
                 Tab => "Tab",
                 Q => "Q",
                 W => "W",
@@ -361,12 +296,7 @@ impl Display for Key {
                 RightBracket => "]",
                 Backslash => "\\",
                 Delete => "Delete",
-                End => "End",
                 PageDown => "Page Down",
-                NumSeven => "7",
-                NumEight => "8",
-                NumNine => "9",
-                NumAddition => "+",
                 CapsLock => "Caps Lock",
                 A => "A",
                 S => "S",
@@ -379,13 +309,8 @@ impl Display for Key {
                 L => "L",
                 SemiColon => ";",
                 Apostrophe => "'",
-                ISO1 => "ISO",
                 Return => "Return",
-                NumFour => "4",
-                NumFive => "5",
-                NumSix => "6",
                 LeftShift => "Left Shift",
-                ISO2 => "ISO",
                 Z => "Z",
                 X => "X",
                 C => "C",
@@ -398,23 +323,20 @@ impl Display for Key {
                 ForwardSlash => "/",
                 RightShift => "Right Shift",
                 UpArrow => "Up Arrow",
-                NumOne => "1",
-                NumTwo => "2",
-                NumThree => "3",
-                NumReturn => "Return",
                 LeftControl => "Left Control",
                 LeftMod => "Left Mod",
                 LeftAlt => "Left Alt",
                 Space => "Space",
                 RightAlt => "Right Alt",
-                RightMod => "Right Mod",
                 Fn => "Fn",
                 RightControl => "Right Control",
                 LeftArrow => "Left Arrow",
                 DownArrow => "Down Arrow",
                 RightArrow => "Right Arrow",
-                NumZero => "0",
-                NumDelete => "Delete",
+                SpaceLed1 => "Space LED 1",
+                SpaceLed2 => "Space LED 2",
+                SpaceLed4 => "Space LED 4",
+                SpaceLed5 => "Space LED 5",
             }
         )
     }
@@ -440,7 +362,6 @@ impl FromScanIndex for Key {
             12 => F12,
             13 => PrintScreen,
             14 => Pause,
-            15 => ScrollLock,
             16 => Tilde,
             17 => One,
             18 => Two,
@@ -456,7 +377,6 @@ impl FromScanIndex for Key {
             28 => Equals,
             29 => Backspace,
             30 => Insert,
-            31 => Home,
             32 => Tab,
             33 => Q,
             34 => W,
@@ -471,9 +391,7 @@ impl FromScanIndex for Key {
             43 => LeftBracket,
             44 => RightBracket,
             // 45 is also associated with `Key::Backslash`
-            45 => ISO1,
             46 => Delete,
-            47 => End,
             48 => CapsLock,
             49 => A,
             50 => S,
@@ -511,29 +429,7 @@ impl FromScanIndex for Key {
             82 => LeftAlt,
             83 => Space,
             84 => RightAlt,
-            85 => RightMod,
             86 => Fn,
-            87 => ISO2,
-            90 => NumOne,
-            91 => NumTwo,
-            92 => NumThree,
-            93 => NumReturn,
-            94 => NumDelete,
-            95 => NumZero,
-            96 => NumSix,
-            97 => NumFive,
-            98 => NumFour,
-            99 => NumAddition,
-            100 => NumNine,
-            101 => NumEight,
-            102 => NumSeven,
-            103 => NumSubtract,
-            104 => NumMultiply,
-            105 => NumDivide,
-            106 => NumLock,
-            107 => A1,
-            108 => A2,
-            109 => A3,
             110 => Mode,
             // Invalid index should only ever be one of: 88 | 89 | 111 ..= 255
             _ => return None,
@@ -547,25 +443,22 @@ impl IntoMatrixRowColumn for Key {
         use Key::*;
         match self {
             Escape => (0, 0),
-            F1 => (0, 2),
-            F2 => (0, 3),
-            F3 => (0, 4),
-            F4 => (0, 5),
-            F5 => (0, 6),
-            F6 => (0, 7),
-            F7 => (0, 8),
-            F8 => (0, 9),
+            F1 => (0, 1),
+            F2 => (0, 2),
+            F3 => (0, 3),
+            F4 => (0, 4),
+            F5 => (0, 5),
+            F6 => (0, 6),
+            F7 => (0, 7),
+            F8 => (0, 8),
             F9 => (0, 10),
             F10 => (0, 11),
             F11 => (0, 12),
             F12 => (0, 13),
-            PrintScreen => (0, 14),
-            Pause => (0, 15),
-            ScrollLock => (0, 16),
-            A1 => (0, 17),
-            A2 => (0, 18),
-            A3 => (0, 19),
-            Mode => (0, 20),
+            Mode => (0, 14),
+            PrintScreen => (0, 15),
+            Pause => (0, 16),
+
             Tilde => (1, 0),
             One => (1, 1),
             Two => (1, 2),
@@ -579,14 +472,10 @@ impl IntoMatrixRowColumn for Key {
             Zero => (1, 10),
             Dash => (1, 11),
             Equals => (1, 12),
-            Backspace => (1, 13),
-            Insert => (1, 14),
-            Home => (1, 15),
+            Backspace => (1, 14),
+            Insert => (1, 15),
             PageUp => (1, 16),
-            NumLock => (1, 17),
-            NumDivide => (1, 18),
-            NumMultiply => (1, 19),
-            NumSubtract => (1, 20),
+
             Tab => (2, 0),
             Q => (2, 1),
             W => (2, 2),
@@ -600,14 +489,10 @@ impl IntoMatrixRowColumn for Key {
             P => (2, 10),
             LeftBracket => (2, 11),
             RightBracket => (2, 12),
-            Backslash => (2, 13),
-            Delete => (2, 14),
-            End => (2, 15),
+            Backslash => (2, 14),
+            Delete => (2, 15),
             PageDown => (2, 16),
-            NumSeven => (2, 17),
-            NumEight => (2, 18),
-            NumNine => (2, 19),
-            NumAddition => (2, 20),
+
             CapsLock => (3, 0),
             A => (3, 1),
             S => (3, 2),
@@ -620,13 +505,9 @@ impl IntoMatrixRowColumn for Key {
             L => (3, 9),
             SemiColon => (3, 10),
             Apostrophe => (3, 11),
-            ISO1 => (3, 12),
-            Return => (3, 13),
-            NumFour => (3, 17),
-            NumFive => (3, 18),
-            NumSix => (3, 19),
+            Return => (3, 14),
+
             LeftShift => (4, 0),
-            ISO2 => (4, 1),
             Z => (4, 2),
             X => (4, 3),
             C => (4, 4),
@@ -637,25 +518,23 @@ impl IntoMatrixRowColumn for Key {
             Comma => (4, 9),
             Period => (4, 10),
             ForwardSlash => (4, 11),
-            RightShift => (4, 13),
+            RightShift => (4, 14),
             UpArrow => (4, 15),
-            NumOne => (4, 17),
-            NumTwo => (4, 18),
-            NumThree => (4, 19),
-            NumReturn => (4, 20),
+
             LeftControl => (5, 0),
             LeftMod => (5, 1),
             LeftAlt => (5, 2),
+            SpaceLed1 => (5, 4),
+            SpaceLed2 => (5, 5),
             Space => (5, 6),
+            SpaceLed4 => (5, 7),
+            SpaceLed5 => (5, 8),
             RightAlt => (5, 10),
-            RightMod => (5, 11),
-            Fn => (5, 12),
-            RightControl => (5, 13),
+            Fn => (5, 11),
+            RightControl => (5, 12),
             LeftArrow => (5, 14),
             DownArrow => (5, 15),
             RightArrow => (5, 16),
-            NumZero => (5, 18),
-            NumDelete => (5, 19),
         }
     }
 }
@@ -818,6 +697,36 @@ impl RgbKeyboard {
         blue: u8,
     ) -> bool {
         let (row, column) = key.get_matrix_row_and_column();
+        unsafe { wooting_rgb_sys::wooting_rgb_array_set_single(row, column, red, green, blue) }
+    }
+
+    /// Set a single color in the color array manually using a (row, column) touple instead
+    /// of a Key. This will not directly update the keyboard unless the auto update flag is
+    /// set (see `array_auto_update`), so it can be called frequently (i.e. in a loop that
+    /// updates the entire keyboard). Returns `true` if the colors have changed.
+    ///
+    /// ```rust,no_run
+    /// use wooting_rgb::{Key, RgbKeyboard};
+    ///
+    /// let mut keyboard = RgbKeyboard::default();
+    /// // Modify the keyboard array so QWERTY will be set to white..
+    /// keyboard.array_set_single_matrix((2, 1), 255, 255, 255);
+    /// keyboard.array_set_single_matrix((2, 2), 255, 255, 255);
+    /// keyboard.array_set_single_matrix((2, 3), 255, 255, 255);
+    /// keyboard.array_set_single_matrix((2, 4), 255, 255, 255);
+    /// keyboard.array_set_single_matrix((2, 5), 255, 255, 255);
+    /// keyboard.array_set_single_matrix((2, 6), 255, 255, 255);
+    /// // ..and apply the change.
+    /// keyboard.array_update();
+    /// ```
+    pub fn array_set_single_matrix(
+        &mut self,
+        row_and_column: (u8, u8),
+        red: u8,
+        green: u8,
+        blue: u8,
+    ) -> bool {
+        let (row, column) = row_and_column;
         unsafe { wooting_rgb_sys::wooting_rgb_array_set_single(row, column, red, green, blue) }
     }
 
