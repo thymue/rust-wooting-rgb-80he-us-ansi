@@ -1,4 +1,4 @@
 [submodule "wooting-rgb-sys/vendor"]
 	path = wooting-rgb-sys/vendor
 	url = https://github.com/WootingKb/wooting-rgb-sdk.git
-	branch = feature/80HE
+	branch = main
